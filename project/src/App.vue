@@ -11,7 +11,8 @@ export default {
 </script>
 
 <style>
-html{
-  font-size: 16px;
-}
+	@import 'assets/css/reset.css';
+	html{
+	  font-size: 16px;
+	}
 </style>
