@@ -1,19 +1,18 @@
 {
   "data":[
     {
-      "type": 0,
-      "imgs": "../../../static/img/wang/w6.png",
-      "title": "添加小说"
-    },{
       "type": 1,
+      "id": "002",
       "imgs": "../../../static/img/wang/w6.png",
       "title": "都市之逆天仙瞳"
     },{
       "type": 1,
+      "id": "003",
       "imgs": "../../../static/img/wang/w7.png",
       "title": "科技小农民"
     },{
       "type": 1,
+      "id": "004",
       "imgs": "../../../static/img/wang/w8.png",
       "title": "校花的功夫保镖"
     }

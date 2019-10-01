@@ -6,43 +6,55 @@
         <img src="@/assets/img/wang/time.png" alt="" class="img1">
       </div>
       <h3 class="title">书架</h3>
-      <span class="edit">编辑</span>
+      <span class="edit" @click="goEdit">编辑</span>
     </div>
-    <scroll class='scroll'>
-      <div>
-        <div class="content">
-          <div class="content_top">
-            <img src="@/assets/img/wang/w5.png" alt="">
-            <div>
-              <h3>阴阳通灵师</h3>
-              <p>原本我以为冥婚这样的事也就能发生在别人的身上或者发生在网络里，让我万万没想到是</p>
-            </div>
-          </div>
-          <ul>
-            <li v-for="(item,index) in book" :key='index'>
+    <div class="bookBottom">
+      <scroll class='scroll'>
+        <div>
+          <div class="content">
+            <div class="content_top">
+              <img src="@/assets/img/wang/w5.png" alt="">
               <div>
-                <!-- <span v-show="item.type">+</span> -->
-                <img :src="item.imgs" alt="" v-show="item.type">
+                <h3>阴阳通灵师</h3>
+                <p>原本我以为冥婚这样的事也就能发生在别人的身上或者发生在网络里，让我万万没想到是</p>
               </div>
-              <p>{{item.title}}</p>
-            </li>
-          </ul>
+            </div>
+            <ul>
+              <li>
+                <div @click="goIndex">
+                  <span>+</span>
+                </div>
+                <p>添加小说</p>
+              </li>
+              <li v-for="(item,index) in book" :key='index'>
+                <div>
+                  <!-- <span v-show="item.type">+</span> -->
+                  <img :src="item.imgs" alt="" v-show="item.type">
+                </div>
+                <p>{{item.title}}</p>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </scroll>
+      </scroll>
+    </div>
+    <edit :show='this.flag' @hide='isShow'></edit>
   </div>
 </template>
 <script>
   import Scroll from '@/components/base/scroll'
+  import edit from '@/components/page/wang/edit'
   export default{
     name: 'book',
     data(){
       return{
-        book: []
+        book: JSON.parse(localStorage.getItem('book')) || [],
+        flag: false
       }
     },
     components:{
-      Scroll
+      Scroll,
+      edit
     },
     created(){
       this.getData();
@@ -51,7 +63,19 @@
       getData(){
         this.axios.get('/static/data/wang/book.json').then(res => {
           this.book = res.data.data;
+          localStorage.setItem('book',JSON.stringify(this.book));
         })
+      },
+      goIndex(){
+        this.$router.push({
+          path: '/index'
+        })
+      },
+      goEdit(){
+        this.flag = true
+      },
+      isShow(value){//显示和隐藏
+      	this.flag = value;
       }
     }
   }
@@ -128,6 +152,14 @@
             &:first-child{
               color: #bcbcbc;
               background: #f8f8f8;
+            }
+            span{
+              font-size: 26px;
+            }
+            img{
+              display: inline-block;
+              width: 100%;
+              height: 100%;
             }
           }
           p{

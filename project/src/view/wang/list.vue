@@ -4,36 +4,43 @@
       <i class="back"><</i>
       <span class="topTitle">精选主题</span>
     </div>
-    <scroll class="listScroll">
-      <div class="content">
-        <ul>
-          <li v-for="(item,index) in list" :key='index'>
-            <img :src="item.imgs" alt="">
-            <div class="listCon">
-              <h3>{{item.title}}</h3>
-              <p>{{item.describe}}</p>
-              <div class="bottom">
-                <span class="name">{{item.name}}</span>
-                <span class="renqi">{{item.num}}万人气</span>
+    <div class="bottom">
+      <scroll class="listScroll">
+        <div class="content">
+          <ul>
+            <li v-for="(item,index) in list" :key='index'>
+              <img :src="item.imgs" alt="" @click='detail(item)'>
+              <div class="listCon">
+                <h3>{{item.title}}</h3>
+                <p>{{item.describe}}</p>
+                <div class="bottom">
+                  <span class="name">{{item.name}}</span>
+                  <span class="renqi">{{item.num}}万人气</span>
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </scroll>
+            </li>
+          </ul>
+        </div>
+      </scroll>
+    </div>
+    <detail :data1='newList' :show='visible' @hide='isShow'></detail>
   </div>
 </template>
 <script>
-  import Scroll from '@/components/base/scroll'
+  import Scroll from '@/components/base/scroll';
+  import detail from '@/components/base/detail';
   export default{
     name: 'list',
     data(){
       return{
-        list: []
+        list: [],
+        newList: {},
+        visible: false
       }
     },
     components:{
-      Scroll
+      Scroll,
+      detail
     },
     created(){
       this.getData();
@@ -43,6 +50,13 @@
         this.axios.get('/static/data/wang/list.json').then(res => {
           this.list = res.data.data
         })
+      },
+      detail(item){
+        this.newList = item;
+        this.visible = true;
+      },
+      isShow(value){//显示和隐藏
+      	this.visible = value;
       }
     }
   }
@@ -82,15 +96,17 @@
           display: flex;
           justify-content: center;
           align-items: center;
+          height: px2rem(110);
           margin-bottom: px2rem(20);
           img{
             display: inline-block;
             width: px2rem(74);
-            height: px2rem(105);
+            height: 100%;
             margin-right: px2rem(12);
           }
           .listCon{
             flex: 1;
+            height: 100%;
             h3{
               font-weight: 600;
             }
