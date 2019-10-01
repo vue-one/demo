@@ -11,7 +11,23 @@ export default {
 </script>
 
 <style>
-html{
-  font-size: 16px;
-}
+  *{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  html {
+    overflow-y: scroll;
+  }
+  :root {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  :root body {
+    position: absolute;
+  }
+  body {
+    width: 100vw;
+    overflow: hidden;
+  }
 </style>
