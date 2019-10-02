@@ -132,18 +132,16 @@
 	}
 	/* 点击好评/人气切换页面 */
 	.haoping-enter,.haoping-leave-to{
-		transform: translateX(-100%);
-		/* display: none; */
+		transform: translateX(0);
 	}
 	.haoping-enter-active,.haoping-leave-active{
 		transition:1s;
 	}
 	.haoping-enter-to,.haoping-leave{
-		/* display: block; */
-		transform: translateX(0);
+		transform: translateX(-100vw);
 	}
 	.renqi-enter,.renqi-leave-to{
-		transform: translateX(-100%);
+		transform: translateX(-100vw);
 		/* display: none; */
 	}
 	.renqi-enter-active,.renqi-leave-active{

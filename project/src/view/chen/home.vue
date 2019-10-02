@@ -43,6 +43,7 @@
 		display: flex;
 		align-items: center;
 		padding-left:px2rem(100);
+		box-sizing:border-box;
 		position: relative;
 		font-size:15px;
 		li{

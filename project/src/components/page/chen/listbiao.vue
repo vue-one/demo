@@ -72,7 +72,7 @@
 				}
 			}
 			.right{
-				flex: 1;
+				flex:1;
 				.top{
 					display: flex;
 					justify-content: space-between;
