@@ -56,7 +56,7 @@
         </div>
       </scroll>
       <div class="foot">
-        <div class="add" @click="add">加入书架</div>
+        <div class="add" @click.prevent="add">{{!this.visible?'加入书架':'查看书架'}}</div>
         <div class="free">免费阅读</div>
       </div>
     </div>
@@ -64,6 +64,7 @@
 </template>
 <script>
   import Scroll from '@/components/base/scroll';
+  import { Toast } from 'mint-ui';
   export default{
     name: 'detail',
     props:{
@@ -81,7 +82,9 @@
     data(){
       return{
         flag: false,
-        list: []
+        visible: false,
+        list: [],
+        newList: []
       }
     },
     mounted() {
@@ -97,11 +100,22 @@
           this.list = res.data.data;
         })
       },
+      // 加入书架
       add(){
-        localStorage.setItem('book',JSON.stringify(this.data1))
-        this.$router.push({
-          path: '/book'
-        })
+        this.newList.push(this.data1);
+        let obj = JSON.stringify(this.newList);
+        console.log(obj);
+        let instance = Toast('已加入书架');
+        setTimeout(() => {
+          instance.close();
+        }, 2000);
+        this.visible = true;
+        localStorage.setItem('book',obj);
+        setTimeout(() => {
+          this.$router.push({
+            path: '/book'
+          })
+        },4000)
       },
       handleScroll(){
         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
@@ -120,8 +134,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: #fff;
     z-index: 100;
     &.fade-enter,&.fade-leave-to{

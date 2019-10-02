@@ -82,90 +82,94 @@
 </script>
 <style lang="scss">
   @import '../../assets/css/pxrem.scss';
-  .bookTop{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: px2rem(50);
+  .book{
+    width: 100%;
+    height: 100%;
     padding: 0 px2rem(14);
     box-sizing: border-box;
-    .top_left{
-      .img1{
-        margin-left: px2rem(20);
-      }
-    }
-    .edit{
-      font-size: 14px;
-      font-weight: 700;
-    }
-  }
-  .scroll{
-    height: px2rem(600);
-    overflow: hidden;
-    .content{
-      height: 100%;
-      padding: px2rem(10) px2rem(14) 0;
-      box-sizing: border-box;
-      .content_top{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: px2rem(78);
-        img{
-          width: px2rem(55);
-          height: px2rem(75);
-          margin-right: px2rem(22);
-        }
-        div{
-          flex: 1;
-          h3{
-            font-size: 16px;
-            margin-bottom: px2rem(12);
-          }
-          p{
-            color: #999;
-            font-size: 14px;
-            line-height: px2rem(26);
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            overflow: hidden;
-          }
+    .bookTop{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: px2rem(50);
+      .top_left{
+        .img1{
+          margin-left: px2rem(20);
         }
       }
-      ul{
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        margin-top: px2rem(45);
-        li{
-          width: px2rem(92);
-          height: 100%;
-          margin-bottom: px2rem(30);
+      .edit{
+        font-size: 14px;
+        font-weight: 700;
+      }
+    }
+    .scroll{
+      height: px2rem(600);
+      overflow: hidden;
+      .content{
+        height: 100%;
+        padding-top: px2rem(10);
+        box-sizing: border-box;
+        .content_top{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: px2rem(78);
+          img{
+            width: px2rem(55);
+            height: px2rem(75);
+            margin-right: px2rem(22);
+          }
           div{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: px2rem(126);
-            margin-bottom: px2rem(10);
-            border-radius: px2rem(4);
-            &:first-child{
-              color: #bcbcbc;
-              background: #f8f8f8;
+            flex: 1;
+            h3{
+              font-size: 16px;
+              margin-bottom: px2rem(12);
             }
-            span{
-              font-size: 26px;
-            }
-            img{
-              display: inline-block;
-              width: 100%;
-              height: 100%;
+            p{
+              color: #999;
+              font-size: 14px;
+              line-height: px2rem(26);
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              overflow: hidden;
             }
           }
-          p{
-            white-space: nowrap;
-            text-overflow:ellipsis;
-            overflow:hidden;
+        }
+        ul{
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          margin-top: px2rem(45);
+          li{
+            width: px2rem(92);
+            height: 100%;
+            margin-bottom: px2rem(30);
+            div{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: px2rem(126);
+              margin-bottom: px2rem(10);
+              border-radius: px2rem(4);
+              &:first-child{
+                color: #bcbcbc;
+                background: #f8f8f8;
+              }
+              span{
+                font-size: 26px;
+              }
+              img{
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+              }
+            }
+            p{
+              white-space: nowrap;
+              text-overflow:ellipsis;
+              overflow:hidden;
+            }
           }
         }
       }

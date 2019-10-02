@@ -9,13 +9,13 @@
       	<li v-for="(item,index) in book" :key='index'>
       	  <div>
       	    <img :src="item.imgs" alt="">
-            <input type="checkbox">
+            <input type="checkbox" :checked='checkIndex.indexOf(index)==-1?false:true' @click="change(index)">
       	  </div>
       	  <p>{{item.title}}</p>
       	</li>
       </ul>
-      <div class="remove">
-        <p>删除已选(0)</p>
+      <div class="remove" @click="remove" :class="{'active': this.checkIndex.length}">
+        <p>删除已选({{this.checkIndex.length}})</p>
       </div>
     </div>
   </transition>
@@ -31,11 +31,9 @@
     data(){
       return{
         book: JSON.parse(localStorage.getItem('book')) || [],
-        isAllCheck: false
+        isAllCheck: false,
+        checkIndex: []
       }
-    },
-    created(){
-      console.log(this.book.length)
     },
     methods:{
       back(){//点击返回详情页隐藏
@@ -45,21 +43,24 @@
       allCheck(){
         if(!this.isAllCheck){
           this.isAllCheck = true;
+          this.book.forEach((item,index) => {
+            this.checkIndex.push(index)
+          })
         }else{
           this.isAllCheck = false;
+          this.checkIndex = [];
         }
       },
       // 单选
-      changeCheck(index){
-        let k = 0;
-        for(let a = 0;a < this.curChoose.length;a++){
-          if(k = 0){
-            this.curChoose.push(index);
-            if(this.curChoose.length == this.book.length){
-              this.isAllCheck = true;
-            }
-          }
-        }
+      change(index){
+        this.checkIndex.indexOf(index) == -1 ? this.checkIndex.push(index): this.checkIndex.splice(this.checkIndex.indexOf(index),1);
+        this.isAllCheck = (this.book.length==this.checkIndex.length);
+      },
+      //删除
+      remove(){
+        this.checkIndex.forEach((item,index) => {
+          this.book.splice(item,1);
+        })
       }
     }
   }
@@ -152,6 +153,12 @@
       text-align: center;
       line-height: px2rem(74);
       background: #ccc;
+      &.active{
+        background: orangered;
+        p{
+          color: #fff;
+        }
+      }
       p{
         font-size: 20px;
         color: #999;
