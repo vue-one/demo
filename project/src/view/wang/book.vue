@@ -65,6 +65,9 @@
           this.book = res.data.data;
           localStorage.setItem('book',JSON.stringify(this.book));
         })
+        // this.axios.get('http://topenapi.tadu.com:8080/api/getBookCount').then(res => {
+        //   console.log(res)
+        // })
       },
       goIndex(){
         this.$router.push({

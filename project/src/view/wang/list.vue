@@ -23,7 +23,7 @@
         </div>
       </scroll>
     </div>
-    <detail :data1='newList' :show='visible' @hide='isShow'></detail>
+    <detail :data1='newList' :show='visible' @hide='isShow' :father='father'></detail>
   </div>
 </template>
 <script>
@@ -57,6 +57,9 @@
       },
       isShow(value){//显示和隐藏
       	this.visible = value;
+      },
+      father(value){
+        this.visible = value;
       }
     }
   }

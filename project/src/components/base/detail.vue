@@ -21,7 +21,7 @@
           </div>
           <div class="con1">
             <div class="jianshu">{{data1.describe}}</div>
-            <div class="mulu">
+            <div class="mulu" @click="popup">
               <h3>目录</h3>
               <div>
                 <span>{{data1.type}},共{{data1.seal}}章</span>
@@ -44,7 +44,7 @@
             <div class="read">
               <h3>读这本书的人还在读</h3>
               <ul>
-              	<li v-for="(item,index) in list" :key='index'>
+              	<li v-for="(item,index) in list" :key='index' @click="child()">
                   <img :src="item.imgs" alt="">
                   <p>{{item.name}}</p>
                   <span>{{item.num}}万人气</span>
@@ -55,6 +55,33 @@
           </div>
         </div>
       </scroll>
+      <mt-popup
+        v-model="popupVisible"
+        position="left">
+        <div class="popup_top">
+          <div class="tops">
+            <div class="imgs"><img :src="data1.imgs" alt=""></div>
+            <div class="tops_con">
+              <h3>{{data1.title}}</h3>
+              <p>{{data1.name}}</p>
+            </div>
+          </div>
+          <div class="bottoms">
+            <div class="bottom_left">
+              共{{data1.count}}章<span>|</span>{{data1.type}}
+            </div>
+            <div class="bottom_right">正序</div>
+          </div>
+        </div>
+        <scroll class="scroll1">
+          <ul>
+          	<li>
+              <span class="zhangshu">第一章</span>
+              <span class="neirong">羞辱</span>
+            </li>
+          </ul>
+        </scroll>
+      </mt-popup>
       <div class="foot">
         <div class="add" @click.prevent="add">{{!this.visible?'加入书架':'查看书架'}}</div>
         <div class="free">免费阅读</div>
@@ -64,7 +91,7 @@
 </template>
 <script>
   import Scroll from '@/components/base/scroll';
-  import { Toast } from 'mint-ui';
+  import { Toast,Popup } from 'mint-ui';
   export default{
     name: 'detail',
     props:{
@@ -74,7 +101,11 @@
     	},
     	show:{
     		type: Boolean
-    	}
+    	},
+      father: {
+        type: Function,
+        default: null
+      }
     },
     components: {
       Scroll
@@ -83,6 +114,7 @@
       return{
         flag: false,
         visible: false,
+        popupVisible: false,
         list: [],
         newList: []
       }
@@ -124,6 +156,14 @@
         }else{
           this.flag = false;
         }
+      },
+      child() {
+        if (this.father) {
+          this.father();
+        }
+      },
+      popup(){
+        this.popupVisible = !this.popupVisible;
       }
     }
   }
@@ -344,6 +384,60 @@
         color: #ccc;
         font-size: 16px;
         text-decoration: none;
+      }
+    }
+    .mint-popup{
+      width: 90%;
+      height: 100%;
+      background: rgb(249,236,210);
+      .popup_top{
+        width: 100%;
+        height: px2rem(200);
+        padding: px2rem(30) px2rem(20) px2rem(20);
+        box-sizing: border-box;
+        .tops{
+          display: flex;
+          margin-bottom: px2rem(10);
+          .imgs{
+            width: px2rem(75);
+            height: px2rem(104);
+            border-radius: px2rem(8);
+          }
+          .tops_con{
+            flex: 1;
+            margin-top: px2rem(10);
+            margin-left: px2rem(15);
+            h3{
+              margin-bottom: px2rem(15);
+            }
+          }
+        }
+        .bottoms{
+          display: flex;
+          justify-content: space-between;
+          .bottom_left{
+            color: #999;
+            span{
+              display: inline-block;
+              margin: 0 px2rem(10);
+            }
+          }
+        }
+      }
+      .scroll1{
+        height: px2rem(500);
+        overflow: hidden;
+        ul{
+          height: px2rem(600);
+          padding: 0 px2rem(25);
+          background: rgb(228,216,192);
+          box-sizing: border-box;
+          li{
+            height: px2rem(66);
+            line-height: px2rem(66);
+            border-bottom: px2rem(2) solid rgb(216,205,182);
+          }
+        }
       }
     }
     // 底部
